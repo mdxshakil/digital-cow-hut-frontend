@@ -89,7 +89,7 @@ export default function Navbar() {
             {false ? (
               <ProfileButton />
             ) : (
-              <Link href={"/auth/login"}>
+              <Link href={"/login"}>
                 <Button>Login</Button>
               </Link>
             )}

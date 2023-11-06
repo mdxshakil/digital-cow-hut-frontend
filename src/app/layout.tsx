@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Titillium_Web } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "../providers/ThemeProvider";
 import ReduxProvider from "../providers/ReduxProvider";
-import Footer from "@/components/sections/Footer";
+import Navbar from "@/components/Navbar";
 
 const titilliumWeb = Titillium_Web({
   subsets: ["latin"],
@@ -28,7 +27,6 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="light">
             <Navbar />
             {children}
-            <Footer />
           </ThemeProvider>
         </body>
       </html>
