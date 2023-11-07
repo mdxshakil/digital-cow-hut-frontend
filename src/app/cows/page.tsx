@@ -10,14 +10,22 @@ import {
 import { useGetAllCowsQuery } from "@/redux/features/cow/cowApi";
 import { ICow } from "@/types/types";
 import Image from "next/image";
+import Loading from "../loading";
+import { usePersistLoginQuery } from "@/redux/features/auth/authApi";
+import { useAppSelector } from "@/redux/hooks";
 
 const AllCowsPage = () => {
+  const { isLoading } = usePersistLoginQuery(undefined);
   const {
     data: cows,
-    isLoading,
+    isLoading: cowsLoaading,
     isError,
     error,
   } = useGetAllCowsQuery(undefined);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="py-12 md:py-24">
@@ -38,7 +46,7 @@ const AllCowsPage = () => {
                         width={0}
                         height={0}
                         sizes="100vw"
-                        style={{ width: "100%", height: "auto" }} // 
+                        style={{ width: "100%", height: "auto" }} //
                         loading="lazy"
                         className="aspect-square object-cover rounded-lg transition-all duration-300 hover:scale-105"
                       />

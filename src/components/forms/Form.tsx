@@ -27,11 +27,10 @@ export default function Form({
   }
 
   const methods = useForm<FormProps>(formConfig);
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit } = methods;
 
   const onSubmit = (data: FieldValues) => {
     submitHandler(data);
-    reset();
   };
 
   return (

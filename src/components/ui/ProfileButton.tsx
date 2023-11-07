@@ -7,8 +7,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import { userLoggedOut } from "@/redux/features/auth/authSlice";
+import { useAppDispatch } from "@/redux/hooks";
 
 export default function ProfileButton() {
+  const dispatch = useAppDispatch();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -22,7 +25,9 @@ export default function ProfileButton() {
         <DropdownMenuSeparator />
         <DropdownMenuItem>Profile</DropdownMenuItem>
         <DropdownMenuItem>Billing</DropdownMenuItem>
-        <DropdownMenuItem>Logout</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => dispatch(userLoggedOut())}>
+          Logout
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

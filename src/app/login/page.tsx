@@ -3,10 +3,13 @@ import Container from "@/components/Container";
 import Form from "@/components/forms/Form";
 import FormInput from "@/components/forms/FormInput";
 import { Button } from "@/components/ui/button";
+import { useLoginMutation } from "@/redux/features/auth/authApi";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 import { SubmitHandler } from "react-hook-form";
+import toast from "react-hot-toast";
 
 type FormValues = {
   email: string;
@@ -14,9 +17,22 @@ type FormValues = {
 };
 
 export default function LoginPage() {
+  const [login, { data, isLoading, isError, isSuccess, error }] =
+    useLoginMutation();
+  const router = useRouter();
+
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
-    console.log(data);
+    login(data);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      router.push("/");
+    }
+    if (isError) {
+      toast.error((error as any)?.data?.message || "An error occured");
+    }
+  });
 
   return (
     <Container>
@@ -39,11 +55,11 @@ export default function LoginPage() {
           </h1>
           <Form submitHandler={onSubmit}>
             <FormInput
-              type="email"
-              name="email"
-              placeholder="Your email"
-              id="email"
-              label="Email"
+              type="text"
+              name="phoneNumber"
+              placeholder="Phone Number"
+              id="phoneNumber"
+              label="Phone Number"
               required={true}
             />
             <FormInput
@@ -54,7 +70,9 @@ export default function LoginPage() {
               label="Password"
               required={true}
             />
-            <Button type="submit">Login</Button>
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? "Loading..." : "Login"}
+            </Button>
           </Form>
           <Link href={"/register"}>
             <p className="mt-2 text-primary text-sm">

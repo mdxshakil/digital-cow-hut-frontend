@@ -7,9 +7,11 @@ import Container from "./Container";
 import ProfileButton from "./ui/ProfileButton";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { useTheme } from "next-themes";
+import { useAppSelector } from "@/redux/hooks";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
+  const { user } = useAppSelector((state) => state.auth);
 
   const routes = [
     {
@@ -86,7 +88,7 @@ export default function Navbar() {
               <Moon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               <span className="sr-only">Toggle Theme</span>
             </Button>
-            {false ? (
+            {user?.userId ? (
               <ProfileButton />
             ) : (
               <Link href={"/login"}>
