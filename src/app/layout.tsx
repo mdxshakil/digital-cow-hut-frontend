@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "../providers/ThemeProvider";
 import ReduxProvider from "../providers/ReduxProvider";
 import Navbar from "@/components/Navbar";
+import { Toaster } from "react-hot-toast";
 
 const titilliumWeb = Titillium_Web({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
         <body className={titilliumWeb.className}>
           <ThemeProvider attribute="class" defaultTheme="light">
             <Navbar />
+            <Toaster position="top-center" />
             {children}
           </ThemeProvider>
         </body>
