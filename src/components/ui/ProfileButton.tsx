@@ -10,18 +10,43 @@ import {
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 
-export default function ProfileButton() {
+type IProps = {
+  role: string;
+  profilePicture: string;
+  name: {
+    firstName: string;
+    lastName: string;
+  };
+};
+
+export default function ProfileButton({
+  role,
+  profilePicture,
+  name: { firstName, lastName },
+}: IProps) {
   const dispatch = useAppDispatch();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar>
-          <AvatarImage src="/img/shadcn.jpg" />
+          <AvatarImage
+            src={profilePicture}
+            className={`border-2 rounded-full ${
+              role === "buyer"
+                ? "border-primary"
+                : role === "seller"
+                ? "border-orange-500"
+                : role === "admin"
+                ? "border-red-500"
+                : ""
+            }`}
+          />
+
           <AvatarFallback>SH</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>{firstName + " " + lastName}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>Profile</DropdownMenuItem>
         <DropdownMenuItem>Billing</DropdownMenuItem>

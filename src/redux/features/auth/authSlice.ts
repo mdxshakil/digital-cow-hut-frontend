@@ -23,6 +23,7 @@ const authSlice = createSlice({
       state.user = userInfo;
     },
     userLoggedOut: (state) => {
+      localStorage.removeItem("auth");
       state.user = {
         phoneNumber: "",
         role: "",

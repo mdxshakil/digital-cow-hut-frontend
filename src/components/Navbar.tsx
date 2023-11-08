@@ -8,10 +8,14 @@ import ProfileButton from "./ui/ProfileButton";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { useTheme } from "next-themes";
 import { useAppSelector } from "@/redux/hooks";
+import { usePersistLoginQuery } from "@/redux/features/auth/authApi";
+import useGetUserFromStore from "@/hooks/useGetUserFromStore";
 
 export default function Navbar() {
+  //persist user login on each reload
+  const { data } = usePersistLoginQuery(undefined);
   const { theme, setTheme } = useTheme();
-  const { user } = useAppSelector((state) => state.auth);
+  const { userId, profilePicture, name, role } = useGetUserFromStore();
 
   const routes = [
     {
@@ -88,8 +92,12 @@ export default function Navbar() {
               <Moon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               <span className="sr-only">Toggle Theme</span>
             </Button>
-            {user?.userId ? (
-              <ProfileButton />
+            {userId ? (
+              <ProfileButton
+                role={role}
+                profilePicture={profilePicture}
+                name={name}
+              />
             ) : (
               <Link href={"/login"}>
                 <Button>Login</Button>
