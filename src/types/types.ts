@@ -27,3 +27,9 @@ export type IUser = {
   budget?: number;
   income?: number;
 };
+
+export type ICart = {
+  _id: string;
+  buyerId: string;
+  cowId: ICow;
+};

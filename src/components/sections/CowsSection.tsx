@@ -41,9 +41,9 @@ const CowsSection = () => {
     content = <Loading />;
   } else if (!isLoading && isError) {
     content = <p className="text-center">An error occured</p>;
-  } else if (!isLoading && !isError && cows.data.length === 0) {
+  } else if (!isLoading && !isError && cows?.data?.length === 0) {
     content = <p className="text-center">No cows available</p>;
-  } else if (!isLoading && !isError && cows.data.length > 0) {
+  } else if (!isLoading && !isError && cows?.data?.length > 0) {
     content = (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {cows?.data?.map((cow: ICow) => (
