@@ -7,7 +7,6 @@ import Container from "./Container";
 import ProfileButton from "./ui/ProfileButton";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { useTheme } from "next-themes";
-import { useAppSelector } from "@/redux/hooks";
 import { usePersistLoginQuery } from "@/redux/features/auth/authApi";
 import useGetUserFromStore from "@/hooks/useGetUserFromStore";
 
@@ -23,7 +22,7 @@ export default function Navbar() {
       label: "Home",
     },
     {
-      href: "/",
+      href: "/cows",
       label: "Cows",
     },
     {

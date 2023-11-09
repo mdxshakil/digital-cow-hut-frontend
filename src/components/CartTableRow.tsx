@@ -1,12 +1,21 @@
+"use client";
 import React from "react";
 import { TableCell, TableRow } from "./ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { ShoppingBag, Trash } from "lucide-react";
 import { ICart } from "@/types/types";
+import { useRemoveFromCartMutation } from "@/redux/features/cart/cartApi";
+import Modal from "./ui/Modal";
 
 export default function CartTableRow({ cartItem }: { cartItem: ICart }) {
   const { name, weight, category, location, price, image } = cartItem.cowId;
+  const [removeFromCart] = useRemoveFromCartMutation();
+
+  const handleRemoveFromCart = async () => {
+    await removeFromCart(cartItem._id);
+  };
+  
   return (
     <TableRow>
       <TableCell>
@@ -21,14 +30,12 @@ export default function CartTableRow({ cartItem }: { cartItem: ICart }) {
       <TableCell>{location}</TableCell>
       <TableCell>{price}</TableCell>
       <TableCell>
-        <div className="flex gap-3 items-center">
+        <span className="flex gap-3 items-center">
           <Button size={"xs"} variant={"default"}>
             <ShoppingBag size={16} />
           </Button>
-          <Button size={"xs"} variant={"destructive"}>
-            <Trash size={16} />
-          </Button>
-        </div>
+          <Modal actionFn={handleRemoveFromCart} />
+        </span>
       </TableCell>
     </TableRow>
   );

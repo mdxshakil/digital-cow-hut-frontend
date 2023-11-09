@@ -6,14 +6,10 @@ import {
   Table,
   TableBody,
   TableCaption,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { ShoppingBag, Trash } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Loading from "../loading";
 import { ICart } from "@/types/types";
 import CartTableRow from "@/components/CartTableRow";
@@ -26,7 +22,6 @@ export default function CartPage() {
     isError,
     error,
   } = useGetMyCartQuery(userId);
-  console.log(data);
 
   //decide what to render
   let content;
