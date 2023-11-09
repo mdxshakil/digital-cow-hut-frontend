@@ -52,6 +52,7 @@ const AllCowsPage = () => {
             userRole={role}
             handleAddToCart={handleAddToCart}
             isLoading={addToCartStatus.isLoading}
+            userId={userId}
           />
         ))}
       </div>

@@ -1,15 +1,17 @@
 import { ICow } from "@/types/types";
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import Image from "next/image";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
+import OrderPlaceModal from "./ui/OrderPlaceModal";
 
 type IProps = {
   cow: ICow;
   userRole: string;
   handleAddToCart: (cowId: string) => void;
   isLoading: boolean;
+  userId: string;
 };
 
 export default function CowCard({
@@ -74,7 +76,10 @@ export default function CowCard({
                 >
                   Add to cart
                 </Button>
-                <Button size={"sm"}>Buy Now</Button>
+                {/* <Button size={"sm"} onClick={handlePlaceOrder}>
+                  Buy Now
+                </Button> */}
+                <OrderPlaceModal cow={cow} />
               </>
             )}
           </div>
