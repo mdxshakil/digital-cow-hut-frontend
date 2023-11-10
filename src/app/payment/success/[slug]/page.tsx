@@ -21,7 +21,7 @@ export default function SuccessPage({ params }: IProps) {
   if (isLoading) {
     return <Loading />;
   }
-  
+
   return (
     <Container>
       <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen place-items-center gap-0 md:gap-12">
@@ -49,7 +49,7 @@ export default function SuccessPage({ params }: IProps) {
             <p>Amount paid: {cow?.price} BDT</p>
           </div>
 
-          <Link href={"/orders"}>
+          <Link href={"/my-orders"}>
             <p className="mt-2 text-primary text-center text-sm">
               Go to my orders
             </p>

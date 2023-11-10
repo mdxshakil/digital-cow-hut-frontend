@@ -15,7 +15,17 @@ const orderApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    getAllOrders: builder.query({
+      query: () => ({
+        url: "/orders",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { usePlaceOrderMutation, useGetOrderByTranIdQuery } = orderApi;
+export const {
+  usePlaceOrderMutation,
+  useGetOrderByTranIdQuery,
+  useGetAllOrdersQuery,
+} = orderApi;

@@ -16,12 +16,8 @@ import CartTableRow from "@/components/CartTableRow";
 
 export default function CartPage() {
   const { userId } = useGetUserFromStore();
-  const {
-    data,
-    isLoading: cartLoading,
-    isError,
-    error,
-  } = useGetMyCartQuery(userId);
+  const { data, isLoading: cartLoading, isError } = useGetMyCartQuery(userId);
+  console.log(data);
 
   //decide what to render
   let content;
@@ -30,7 +26,7 @@ export default function CartPage() {
   } else if (!cartLoading && isError) {
     content = <p className="text-center">An error occured</p>;
   } else if (!cartLoading && !isError && data.data.length === 0) {
-    content = <p className="text-center">No cows available</p>;
+    content = <p className="text-center">Cart is empty</p>;
   } else if (!cartLoading && !isError && data.data.length > 0) {
     content = data?.data?.map((cartItem: ICart) => (
       <CartTableRow key={cartItem._id} cartItem={cartItem} />

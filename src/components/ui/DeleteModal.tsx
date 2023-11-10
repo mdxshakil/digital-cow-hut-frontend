@@ -16,7 +16,7 @@ type IProps = {
   actionFn: () => void;
 };
 
-const Modal = ({ actionFn }: IProps) => {
+const DeleteModal = ({ actionFn }: IProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -26,7 +26,7 @@ const Modal = ({ actionFn }: IProps) => {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle className="text-red-500">Remove this cow from cart?</AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone.
           </AlertDialogDescription>
@@ -42,4 +42,4 @@ const Modal = ({ actionFn }: IProps) => {
   );
 };
 
-export default Modal;
+export default DeleteModal;

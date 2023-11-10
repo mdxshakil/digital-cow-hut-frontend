@@ -77,7 +77,9 @@ export default function CowCard({
                 >
                   Add to cart
                 </Button>
-                {userRole && <OrderPlaceModal cow={cow} />}
+                {userRole && (
+                  <OrderPlaceModal cow={cow} btnSize="sm" btnChild="Buy Now" />
+                )}
               </>
             )}
           </div>

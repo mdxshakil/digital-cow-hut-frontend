@@ -6,7 +6,8 @@ import { Button } from "./ui/button";
 import { ShoppingBag, Trash } from "lucide-react";
 import { ICart } from "@/types/types";
 import { useRemoveFromCartMutation } from "@/redux/features/cart/cartApi";
-import Modal from "./ui/Modal";
+import OrderPlaceModal from "./ui/OrderPlaceModal";
+import DeleteModal from "./ui/DeleteModal";
 
 export default function CartTableRow({ cartItem }: { cartItem: ICart }) {
   const { name, weight, category, location, price, image } = cartItem.cowId;
@@ -15,13 +16,13 @@ export default function CartTableRow({ cartItem }: { cartItem: ICart }) {
   const handleRemoveFromCart = async () => {
     await removeFromCart(cartItem._id);
   };
-  
+
   return (
     <TableRow>
       <TableCell>
         <Avatar>
           <AvatarImage src={image} />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarFallback>COW</AvatarFallback>
         </Avatar>
       </TableCell>
       <TableCell>{name}</TableCell>
@@ -32,9 +33,14 @@ export default function CartTableRow({ cartItem }: { cartItem: ICart }) {
       <TableCell>
         <span className="flex gap-3 items-center">
           <Button size={"xs"} variant={"default"}>
-            <ShoppingBag size={16} />
+            {/* <ShoppingBag size={16} /> */}
+            <OrderPlaceModal
+              cow={cartItem.cowId}
+              btnSize="xs"
+              btnChild={<ShoppingBag size={16} />}
+            />
           </Button>
-          <Modal actionFn={handleRemoveFromCart} />
+          <DeleteModal actionFn={handleRemoveFromCart} />
         </span>
       </TableCell>
     </TableRow>

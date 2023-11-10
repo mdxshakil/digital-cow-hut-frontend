@@ -33,3 +33,13 @@ export type ICart = {
   buyerId: string;
   cowId: ICow;
 };
+
+export type IOrderItem = {
+  _id: string;
+  transactionId: string;
+  shippingAddress: string;
+  paymentStatus: boolean;
+  isDelivered: boolean;
+  cow: ICow;
+  buyer: IUser;
+};

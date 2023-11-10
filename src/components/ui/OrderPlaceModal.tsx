@@ -15,7 +15,7 @@ import useGetUserFromStore from "@/hooks/useGetUserFromStore";
 import { usePlaceOrderMutation } from "@/redux/features/order/orderApi";
 import { ICow } from "@/types/types";
 import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "./input";
 import { Label } from "./label";
 import { AvatarFallback, AvatarImage, Avatar } from "./avatar";
@@ -23,9 +23,11 @@ import toast from "react-hot-toast";
 
 type IProps = {
   cow: ICow;
+  btnSize: "icon" | "default" | "sm" | "xs" | "lg" | null | undefined;
+  btnChild: string | React.ReactElement | React.ReactNode;
 };
 
-const OrderPlaceModal = ({ cow }: IProps) => {
+const OrderPlaceModal = ({ cow, btnSize, btnChild }: IProps) => {
   const [placeOrder, { data }] = usePlaceOrderMutation();
   const { userId } = useGetUserFromStore();
   const [shippingAddress, setShippingAddress] = useState("");
@@ -53,7 +55,9 @@ const OrderPlaceModal = ({ cow }: IProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size={"sm"}>Buy Now</Button>
+        <Button size={btnSize} variant={"default"}>
+          {btnChild}
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

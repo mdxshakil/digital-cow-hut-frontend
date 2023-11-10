@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
+import Link from "next/link";
 
 type IProps = {
   role: string;
@@ -49,7 +50,9 @@ export default function ProfileButton({
         <DropdownMenuLabel>{firstName + " " + lastName}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>My Orders</DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href={"/my-orders"}>My Orders</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => dispatch(userLoggedOut())}>
           Logout
         </DropdownMenuItem>
