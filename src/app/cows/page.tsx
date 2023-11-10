@@ -7,10 +7,12 @@ import { useAddToCartMutation } from "@/redux/features/cart/cartApi";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import CowCard from "@/components/CowCard";
+import { useRouter } from "next/navigation";
 
 const AllCowsPage = () => {
   const { userId, role } = useAppSelector((state) => state.auth.user);
   const [addToCart, addToCartStatus] = useAddToCartMutation();
+  const router = useRouter();
   const {
     data: cows,
     isLoading,
@@ -19,6 +21,10 @@ const AllCowsPage = () => {
   } = useGetAllCowsQuery(undefined);
 
   const handleAddToCart = async (cowId: string) => {
+    if (!userId) {
+      router.push("/login");
+      return;
+    }
     const cartData = { cowId, buyerId: userId };
     await addToCart(cartData);
   };

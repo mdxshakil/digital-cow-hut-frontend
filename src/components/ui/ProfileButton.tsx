@@ -49,7 +49,7 @@ export default function ProfileButton({
         <DropdownMenuLabel>{firstName + " " + lastName}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Billing</DropdownMenuItem>
+        <DropdownMenuItem>My Orders</DropdownMenuItem>
         <DropdownMenuItem onClick={() => dispatch(userLoggedOut())}>
           Logout
         </DropdownMenuItem>

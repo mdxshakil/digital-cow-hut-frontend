@@ -9,7 +9,13 @@ const orderApi = apiSlice.injectEndpoints({
         body: orderData,
       }),
     }),
+    getOrderByTranId: builder.query({
+      query: (tranId) => ({
+        url: `/orders/transaction/${tranId}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { usePlaceOrderMutation } = orderApi;
+export const { usePlaceOrderMutation, useGetOrderByTranIdQuery } = orderApi;

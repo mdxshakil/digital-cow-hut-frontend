@@ -8,18 +8,25 @@ import { cowQuery } from "@/constants/cow";
 import Loading from "@/app/loading";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const CowsSection = () => {
   const { role, userId } = useGetUserFromStore();
+  const router = useRouter();
   const {
     data: cows,
     isLoading,
     isError,
     error,
   } = useGetAllCowsQuery(cowQuery);
+
   const [addToCart, addToCartStatus] = useAddToCartMutation();
 
   const handleAddToCart = async (cowId: string) => {
+    if (!userId) {
+      router.push("/login");
+      return;
+    }
     const cartData = { cowId, buyerId: userId };
     await addToCart(cartData);
   };
@@ -53,6 +60,7 @@ const CowsSection = () => {
             userRole={role}
             handleAddToCart={handleAddToCart}
             isLoading={addToCartStatus.isLoading}
+            userId={userId}
           />
         ))}
       </div>

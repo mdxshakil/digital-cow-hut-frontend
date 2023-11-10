@@ -58,6 +58,7 @@ export default function CowCard({
               </Badge>
             </div>
           </div>
+          <p className="text-sm">{cow.location}</p>
           <div>
             {cow?.price} <span className="">&#2547;</span>
           </div>
@@ -72,14 +73,11 @@ export default function CowCard({
                   size={"sm"}
                   variant={"outline"}
                   onClick={() => handleAddToCart(cow._id)}
-                  disabled={userRole !== "buyer" || isLoading}
+                  disabled={isLoading}
                 >
                   Add to cart
                 </Button>
-                {/* <Button size={"sm"} onClick={handlePlaceOrder}>
-                  Buy Now
-                </Button> */}
-                <OrderPlaceModal cow={cow} />
+                {userRole && <OrderPlaceModal cow={cow} />}
               </>
             )}
           </div>
