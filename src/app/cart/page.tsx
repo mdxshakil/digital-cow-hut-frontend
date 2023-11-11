@@ -6,7 +6,6 @@ import {
   Table,
   TableBody,
   TableCaption,
-  TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
@@ -14,25 +13,28 @@ import Loading from "../loading";
 import { ICart } from "@/types/types";
 import CartTableRow from "@/components/CartTableRow";
 import TableHeaderOptions from "@/components/TableHeaderOptions";
+import { useAuthCheck } from "@/hooks/useAuthCheck";
+const tableHeaders = [
+  "Image",
+  "Name",
+  "Weight",
+  "Category",
+  "Location",
+  "Price",
+  "Action",
+];
 
 export default function CartPage() {
-  const tableHeaders = [
-    "Image",
-    "Name",
-    "Weight",
-    "Category",
-    "Location",
-    "Price",
-    "Action",
-  ];
-  const { userId } = useGetUserFromStore();
+  // get user from store
+  const { userId, role } = useGetUserFromStore();
+  //protect route
+  const { isLoading } = useAuthCheck(role);
   const { data, isLoading: cartLoading, isError } = useGetMyCartQuery(userId);
-  console.log(data);
 
   //decide what to render
   let content;
-  if (cartLoading) {
-    content = <Loading />;
+  if (cartLoading || isLoading) {
+    return <Loading />;
   } else if (!cartLoading && isError) {
     content = <p className="text-center">An error occured</p>;
   } else if (!cartLoading && !isError && data.data.length === 0) {

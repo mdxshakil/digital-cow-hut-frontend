@@ -25,7 +25,7 @@ export default function RootLayout({
     <ReduxProvider>
       <html lang="en">
         <body className={titilliumWeb.className}>
-          <ThemeProvider attribute="class" defaultTheme="light">
+          <ThemeProvider attribute="class" defaultTheme="dark">
             <Navbar />
             <Toaster position="top-center" />
             {children}

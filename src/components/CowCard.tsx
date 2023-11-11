@@ -67,7 +67,7 @@ export default function CowCard({
           <div className="flex justify-end gap-3 w-full">
             {cow.label === "sold out" && <Badge>Sold out</Badge>}
             {userRole === "buyer" && (
-              <div>
+              <div className="flex gap-2">
                 <Button
                   size={"sm"}
                   variant={"outline"}
