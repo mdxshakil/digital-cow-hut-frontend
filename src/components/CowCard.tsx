@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import OrderPlaceModal from "./ui/OrderPlaceModal";
+import { MapPin } from "lucide-react";
 
 type IProps = {
   cow: ICow;
@@ -58,7 +59,12 @@ export default function CowCard({
               </Badge>
             </div>
           </div>
-          <p className="text-sm">{cow.location}</p>
+          <p className="text-sm flex gap-1 items-center my-1">
+            <span>
+              <MapPin size={16} />
+            </span>
+            {cow.location}
+          </p>
           <div>
             {cow?.price} <span className="">&#2547;</span>
           </div>

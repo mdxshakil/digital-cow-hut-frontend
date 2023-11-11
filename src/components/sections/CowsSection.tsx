@@ -69,7 +69,7 @@ const CowsSection = () => {
 
   return (
     <div className="py-12 md:py-24">
-      <h2 className="text-center text-4xl tracking-wider mb-12">
+      <h2 className="text-center text-4xl tracking-wider mb-12 md:mb-20">
         Available cows
       </h2>
       <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">

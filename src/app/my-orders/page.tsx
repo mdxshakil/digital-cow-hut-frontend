@@ -13,7 +13,6 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { IOrderItem } from "@/types/types";
 import TableHeaderOptions from "@/components/TableHeaderOptions";
-import useGetUserFromStore from "@/hooks/useGetUserFromStore";
 import { useAuthCheck } from "@/hooks/useAuthCheck";
 import Loading from "../loading";
 import { USER_ROLE } from "@/types";
