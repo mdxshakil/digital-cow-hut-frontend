@@ -40,7 +40,10 @@ export default function CartTableRow({ cartItem }: { cartItem: ICart }) {
               btnChild={<ShoppingBag size={16} />}
             />
           </Button>
-          <DeleteModal actionFn={handleRemoveFromCart} />
+          <DeleteModal
+            actionFn={handleRemoveFromCart}
+            message="Remove this cow from cart?"
+          />
         </span>
       </TableCell>
     </TableRow>

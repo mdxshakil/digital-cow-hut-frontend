@@ -13,10 +13,12 @@ import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
 
 type IProps = {
-  actionFn: () => void;
+  actionFn: (id?: string) => void;
+  message: string;
+  id?: string;
 };
 
-const DeleteModal = ({ actionFn }: IProps) => {
+const DeleteModal = ({ actionFn, message, id }: IProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -26,14 +28,16 @@ const DeleteModal = ({ actionFn }: IProps) => {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-red-500">Remove this cow from cart?</AlertDialogTitle>
+          <AlertDialogTitle className="text-red-500">
+            {message}
+          </AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => actionFn()}>
+          <AlertDialogAction onClick={() => actionFn(id)}>
             Continue
           </AlertDialogAction>
         </AlertDialogFooter>

@@ -14,8 +14,28 @@ const cowApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["seller_cows"],
+    }),
+    getSellerCows: builder.query({
+      query: () => ({
+        url: "/cows/my-cows",
+        method: "GET",
+      }),
+      providesTags: ["seller_cows"],
+    }),
+    deleteCow: builder.mutation({
+      query: (cowId) => ({
+        url: `/cows/${cowId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["seller_cows"],
     }),
   }),
 });
 
-export const { useGetAllCowsQuery, usePostNewCowMutation } = cowApi;
+export const {
+  useGetAllCowsQuery,
+  usePostNewCowMutation,
+  useGetSellerCowsQuery,
+  useDeleteCowMutation,
+} = cowApi;

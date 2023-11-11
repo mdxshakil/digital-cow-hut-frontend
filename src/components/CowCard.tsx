@@ -65,10 +65,9 @@ export default function CowCard({
         </CardContent>
         <CardFooter>
           <div className="flex justify-end gap-3 w-full">
-            {cow.label === "sold out" ? (
-              <Badge>Sold out</Badge>
-            ) : (
-              <>
+            {cow.label === "sold out" && <Badge>Sold out</Badge>}
+            {userRole === "buyer" && (
+              <div>
                 <Button
                   size={"sm"}
                   variant={"outline"}
@@ -77,10 +76,8 @@ export default function CowCard({
                 >
                   Add to cart
                 </Button>
-                {userRole && (
-                  <OrderPlaceModal cow={cow} btnSize="sm" btnChild="Buy Now" />
-                )}
-              </>
+                <OrderPlaceModal cow={cow} btnSize="sm" btnChild="Buy Now" />
+              </div>
             )}
           </div>
         </CardFooter>

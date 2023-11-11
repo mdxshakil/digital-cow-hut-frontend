@@ -13,8 +13,18 @@ import {
 import Loading from "../loading";
 import { ICart } from "@/types/types";
 import CartTableRow from "@/components/CartTableRow";
+import TableHeaderOptions from "@/components/TableHeaderOptions";
 
 export default function CartPage() {
+  const tableHeaders = [
+    "Image",
+    "Name",
+    "Weight",
+    "Category",
+    "Location",
+    "Price",
+    "Action",
+  ];
   const { userId } = useGetUserFromStore();
   const { data, isLoading: cartLoading, isError } = useGetMyCartQuery(userId);
   console.log(data);
@@ -39,13 +49,7 @@ export default function CartPage() {
         <TableCaption>A list of your cart items.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead>Image</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Weight</TableHead>
-            <TableHead>Category</TableHead>
-            <TableHead>Location</TableHead>
-            <TableHead>Price</TableHead>
-            <TableHead>Action</TableHead>
+            <TableHeaderOptions headers={tableHeaders} />
           </TableRow>
         </TableHeader>
         <TableBody>{content}</TableBody>

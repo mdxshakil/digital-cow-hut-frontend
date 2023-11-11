@@ -13,9 +13,18 @@ import {
 } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { IOrderItem } from "@/types/types";
+import TableHeaderOptions from "@/components/TableHeaderOptions";
 
 export default function MyOrdersPage() {
   const { data } = useGetAllOrdersQuery(undefined);
+  const tableHeaders = [
+    "Image",
+    "TransactionID",
+    "Cow Location",
+    "Weight(KG)",
+    "Amount",
+    "Delivery",
+  ];
 
   return (
     <Container>
@@ -23,12 +32,7 @@ export default function MyOrdersPage() {
         <TableCaption>A list of your orders.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead>Image</TableHead>
-            <TableHead>TrasactionID</TableHead>
-            <TableHead>Cow Location</TableHead>
-            <TableHead>Weight (kg)</TableHead>
-            <TableHead>Amount</TableHead>
-            <TableHead>Delivery</TableHead>
+            <TableHeaderOptions headers={tableHeaders} />
           </TableRow>
         </TableHeader>
         <TableBody>
