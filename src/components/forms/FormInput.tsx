@@ -26,7 +26,6 @@ export default function FormInput({
   value,
   id,
   placeholder,
-  validation,
   label,
   required,
 }: IInput) {

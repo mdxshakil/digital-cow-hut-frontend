@@ -8,7 +8,14 @@ const cowApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    postNewCow: builder.mutation({
+      query: (data) => ({
+        url: "/cows",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetAllCowsQuery } = cowApi;
+export const { useGetAllCowsQuery, usePostNewCowMutation } = cowApi;

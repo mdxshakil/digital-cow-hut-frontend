@@ -7,6 +7,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import { profileOptions } from "@/constants/navbar";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import Link from "next/link";
@@ -26,6 +27,7 @@ export default function ProfileButton({
   name: { firstName, lastName },
 }: IProps) {
   const dispatch = useAppDispatch();
+  const options = profileOptions(role);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -49,10 +51,11 @@ export default function ProfileButton({
       <DropdownMenuContent>
         <DropdownMenuLabel>{firstName + " " + lastName}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href={"/my-orders"}>My Orders</Link>
-        </DropdownMenuItem>
+        {options?.map((option) => (
+          <DropdownMenuItem key={option.id}>
+            <Link href={option.path}>{option.label}</Link>
+          </DropdownMenuItem>
+        ))}
         <DropdownMenuItem onClick={() => dispatch(userLoggedOut())}>
           Logout
         </DropdownMenuItem>
