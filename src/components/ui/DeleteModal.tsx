@@ -10,21 +10,28 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { ShoppingBag } from "lucide-react";
+import { Loader2, Trash } from "lucide-react";
 
 type IProps = {
   actionFn: (id?: string) => void;
   message: string;
   id?: string;
+  isLoading: boolean;
 };
 
-const DeleteModal = ({ actionFn, message, id }: IProps) => {
+const DeleteModal = ({ actionFn, message, id, isLoading }: IProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size={"xs"} variant={"destructive"}>
-          <ShoppingBag size={16} />
-        </Button>
+        {isLoading ? (
+          <Button size={"xs"} variant={"destructive"}>
+            <Loader2 size={16} className="animate-spin" />
+          </Button>
+        ) : (
+          <Button size={"xs"} variant={"destructive"}>
+            <Trash size={16} />
+          </Button>
+        )}
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

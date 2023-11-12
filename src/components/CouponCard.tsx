@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -8,9 +8,38 @@ import {
 } from "@/components/ui/card";
 import { Button } from "./ui/button";
 import { ICoupon } from "@/types/types";
+import { USER_ROLE } from "@/types";
+import { useClaimCouponMutation } from "@/redux/features/coupon/couponApi";
+import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
-export default function CouponCard({ coupon }: { coupon: ICoupon }) {
-  const { discountAmount } = coupon || {};
+type IProps = {
+  coupon: ICoupon;
+  role: string;
+  userId: string;
+};
+
+export default function CouponCard({ coupon, role, userId }: IProps) {
+  const { discountAmount, _id } = coupon || {};
+  const [claimCoupon, { isLoading, isError, error, isSuccess }] =
+    useClaimCouponMutation();
+
+  const handleCouponClaim = (couponId: string) => {
+    if (!userId) {
+      redirect("/login");
+    }
+    claimCoupon({ couponId, userId });
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Coupon claimed");
+    }
+    if (isError) {
+      toast.error((error as any)?.data.message || "An error occured");
+    }
+  }, [error, isSuccess, isError]);
+
   return (
     <Card className="hover:bg-primary transition-all duration-500 group">
       <CardHeader className="pt-3 pb-0">
@@ -28,11 +57,19 @@ export default function CouponCard({ coupon }: { coupon: ICoupon }) {
         </div>
         <p className="text-sm">Limited Stock</p>
       </CardContent>
-      <CardFooter>
-        <Button size={"xs"} variant={"secondary"} className="mx-auto px-6">
-          Claim
-        </Button>
-      </CardFooter>
+      {role === USER_ROLE.BUYER && (
+        <CardFooter>
+          <Button
+            size={"xs"}
+            variant={"secondary"}
+            className="mx-auto px-6"
+            onClick={() => handleCouponClaim(_id)}
+            disabled={isLoading}
+          >
+            Claim
+          </Button>
+        </CardFooter>
+      )}
     </Card>
   );
 }

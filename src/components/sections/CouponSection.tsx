@@ -3,9 +3,11 @@ import Container from "../Container";
 import CouponCard from "../CouponCard";
 import { ICoupon } from "@/types/types";
 import Loading from "@/app/loading";
+import useGetUserFromStore from "@/hooks/useGetUserFromStore";
 
 export default function CouponSection() {
   const { data: coupons, isLoading, isError } = useGetAllCouponQuery(undefined);
+  const { role, userId } = useGetUserFromStore();
 
   //decide what to render
   let content;
@@ -19,7 +21,12 @@ export default function CouponSection() {
     content = (
       <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
         {coupons?.data?.map((coupon: ICoupon) => (
-          <CouponCard key={coupon._id} coupon={coupon} />
+          <CouponCard
+            key={coupon._id}
+            coupon={coupon}
+            role={role}
+            userId={userId}
+          />
         ))}
       </div>
     );
@@ -27,9 +34,12 @@ export default function CouponSection() {
 
   return (
     <div className="py-12 md:py-24">
-      <h2 className="text-center text-4xl tracking-wider mb-12 md:mb-20">
-        Grab coupons before they are out
-      </h2>
+      <div className="mb-12 md:mb-20">
+        <h2 className="text-center text-4xl tracking-wider">
+          Grab coupons before they are out
+        </h2>
+        <p className="text-center">Only for buyers</p>
+      </div>
       <Container>{content}</Container>
     </div>
   );

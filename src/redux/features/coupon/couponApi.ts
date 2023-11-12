@@ -17,7 +17,34 @@ const couponApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["coupon"],
     }),
+    getMyCoupons: builder.query({
+      query: (userId) => ({
+        url: `/coupon/${userId}`,
+        method: "GET",
+      }),
+      providesTags: ["coupon"],
+    }),
+    claimCoupon: builder.mutation({
+      query: ({ couponId, userId }) => ({
+        url: `/coupon/${couponId}`,
+        method: "POST",
+        body: { userId },
+      }),
+    }),
+    deleteCoupon: builder.mutation({
+      query: (couponId) => ({
+        url: `/coupon/${couponId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["coupon"],
+    }),
   }),
 });
 
-export const { useAddNewCouponMutation, useGetAllCouponQuery } = couponApi;
+export const {
+  useAddNewCouponMutation,
+  useGetAllCouponQuery,
+  useGetMyCouponsQuery,
+  useClaimCouponMutation,
+  useDeleteCouponMutation,
+} = couponApi;

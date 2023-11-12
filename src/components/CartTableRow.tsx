@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { TableCell, TableRow } from "./ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
@@ -8,14 +8,25 @@ import { ICart } from "@/types/types";
 import { useRemoveFromCartMutation } from "@/redux/features/cart/cartApi";
 import OrderPlaceModal from "./ui/OrderPlaceModal";
 import DeleteModal from "./ui/DeleteModal";
+import toast from "react-hot-toast";
 
 export default function CartTableRow({ cartItem }: { cartItem: ICart }) {
   const { name, weight, category, location, price, image } = cartItem.cowId;
-  const [removeFromCart] = useRemoveFromCartMutation();
+  const [removeFromCart, { isLoading, isError, error, isSuccess }] =
+    useRemoveFromCartMutation();
 
   const handleRemoveFromCart = async () => {
     await removeFromCart(cartItem._id);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Item removed from cart");
+    }
+    if (isError) {
+      toast.error((error as any)?.data.message || "An error occured");
+    }
+  }, [error, isError, isSuccess]);
 
   return (
     <TableRow>
@@ -33,7 +44,6 @@ export default function CartTableRow({ cartItem }: { cartItem: ICart }) {
       <TableCell>
         <span className="flex gap-3 items-center">
           <Button size={"xs"} variant={"default"}>
-            {/* <ShoppingBag size={16} /> */}
             <OrderPlaceModal
               cow={cartItem.cowId}
               btnSize="xs"
@@ -43,6 +53,7 @@ export default function CartTableRow({ cartItem }: { cartItem: ICart }) {
           <DeleteModal
             actionFn={handleRemoveFromCart}
             message="Remove this cow from cart?"
+            isLoading={isLoading}
           />
         </span>
       </TableCell>

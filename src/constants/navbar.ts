@@ -37,6 +37,11 @@ export const profileOptions = (userRole: string) => {
       path: "/my-orders",
       label: "My Orders",
     },
+    {
+      id: 3,
+      path: "/my-coupons",
+      label: "My Coupons",
+    },
   ];
   const sellerOptions = [
     {

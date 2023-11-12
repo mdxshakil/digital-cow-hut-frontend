@@ -37,7 +37,7 @@ export default function CouponModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Add new coupon</Button>
+        <Button variant="default">Add new coupon</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
