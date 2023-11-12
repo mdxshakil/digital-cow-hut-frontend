@@ -66,13 +66,13 @@ export default function CowCard({
             {cow.location}
           </p>
           <div>
-            {cow?.price} <span className="">&#2547;</span>
+            {cow?.price} <span>&#2547;</span>
           </div>
         </CardContent>
         <CardFooter>
           <div className="flex justify-end gap-3 w-full">
             {cow.label === "sold out" && <Badge>Sold out</Badge>}
-            {userRole === "buyer" && (
+            {userRole === "buyer" && cow.label === "for sale" && (
               <div className="flex gap-2">
                 <Button
                   size={"sm"}

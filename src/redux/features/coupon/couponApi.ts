@@ -22,7 +22,7 @@ const couponApi = apiSlice.injectEndpoints({
         url: `/coupon/${userId}`,
         method: "GET",
       }),
-      providesTags: ["coupon"],
+      providesTags: ["user_coupon"],
     }),
     claimCoupon: builder.mutation({
       query: ({ couponId, userId }) => ({
@@ -30,6 +30,7 @@ const couponApi = apiSlice.injectEndpoints({
         method: "POST",
         body: { userId },
       }),
+      invalidatesTags: ["user_coupon"],
     }),
     deleteCoupon: builder.mutation({
       query: (couponId) => ({

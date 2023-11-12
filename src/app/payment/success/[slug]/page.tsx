@@ -45,10 +45,6 @@ export default function SuccessPage({ params }: IProps) {
             <p className="text-sm">Transaction ID: {transactionId}</p>
           </div>
           <Separator className="mb-3" />
-          <div className="text-center">
-            <p>Amount paid: {cow?.price} BDT</p>
-          </div>
-
           <Link href={"/my-orders"}>
             <p className="mt-2 text-primary text-center text-sm">
               Go to my orders

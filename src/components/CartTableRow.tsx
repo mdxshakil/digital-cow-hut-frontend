@@ -43,13 +43,11 @@ export default function CartTableRow({ cartItem }: { cartItem: ICart }) {
       <TableCell>{price}</TableCell>
       <TableCell>
         <span className="flex gap-3 items-center">
-          <Button size={"xs"} variant={"default"}>
-            <OrderPlaceModal
-              cow={cartItem.cowId}
-              btnSize="xs"
-              btnChild={<ShoppingBag size={16} />}
-            />
-          </Button>
+          <OrderPlaceModal
+            cow={cartItem.cowId}
+            btnSize="xs"
+            btnChild={<ShoppingBag size={16} />}
+          />
           <DeleteModal
             actionFn={handleRemoveFromCart}
             message="Remove this cow from cart?"

@@ -41,13 +41,13 @@ export default function CouponCard({ coupon, role, userId }: IProps) {
   }, [error, isSuccess, isError]);
 
   return (
-    <Card className="hover:bg-primary transition-all duration-500 group">
+    <Card className="hover:bg-secondary bg-primary transition-all duration-500 group">
       <CardHeader className="pt-3 pb-0">
         <CardTitle className="text-center">COUPON</CardTitle>
       </CardHeader>
       <CardContent className="text-center pb-3">
         <div className="flex justify-center gap-1">
-          <h1 className="text-4xl md:text-6xl font-bold text-primary group-hover:text-secondary">
+          <h1 className="text-4xl md:text-6xl font-bold text-secondary group-hover:text-primary">
             {discountAmount}
           </h1>
           <p className="flex flex-col text-start">
