@@ -10,6 +10,21 @@ export const profileOptions = (userRole: string) => {
       path: "/manage-orders",
       label: "Manage Orders",
     },
+    {
+      id: 3,
+      path: "/manage-coupons",
+      label: "Manage Coupons",
+    },
+    {
+      id: 4,
+      path: "/manage-users",
+      label: "Manage Users",
+    },
+    {
+      id: 5,
+      path: "/manage-cows",
+      label: "Manage Cows",
+    },
   ];
   const buyerOptions = [
     {

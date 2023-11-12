@@ -43,3 +43,11 @@ export type IOrderItem = {
   cow: ICow;
   buyer: IUser;
 };
+
+export type ICoupon = {
+  _id: string;
+  couponCode: string;
+  discountAmount: number;
+  couponStock: number;
+  usedBy?: any;
+};

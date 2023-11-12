@@ -24,5 +24,5 @@ export const apiSlice = createApi({
     return result;
   },
   endpoints: () => ({}),
-  tagTypes: ["cart","seller_cows"],
+  tagTypes: ["cart", "seller_cows", "coupon"],
 });
