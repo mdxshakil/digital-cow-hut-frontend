@@ -92,6 +92,7 @@ export default function MyCowsPage() {
                     actionFn={() => handleDeleteCow(cow._id)}
                     message="Delete this cow permanently?"
                     id={cow._id}
+                    isLoading={deleteLoading}
                   />
                 )
               ) : (
