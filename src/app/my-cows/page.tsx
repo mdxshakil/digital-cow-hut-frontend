@@ -26,15 +26,17 @@ import { Badge } from "@/components/ui/badge";
 import toast from "react-hot-toast";
 import { Loader2 } from "lucide-react";
 
+const tableHeaders = [
+  "Image",
+  "Price",
+  "Weight",
+  "Breed",
+  "Location",
+  "Delete",
+];
+
 export default function MyCowsPage() {
-  const tableHeaders = [
-    "Image",
-    "Price",
-    "Weight",
-    "Breed",
-    "Location",
-    "Delete",
-  ];
+ 
   const { data: cows, isLoading, isError } = useGetSellerCowsQuery(undefined);
   const [
     deleteCow,

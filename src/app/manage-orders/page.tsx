@@ -1,9 +1,12 @@
 "use client";
 import Container from "@/components/Container";
 import { useAuthCheck } from "@/hooks/useAuthCheck";
-import { useGetAllOrdersQuery } from "@/redux/features/order/orderApi";
+import {
+  useDeliverOrderMutation,
+  useGetAllOrdersQuery,
+} from "@/redux/features/order/orderApi";
 import { USER_ROLE } from "@/types";
-import React from "react";
+import React, { useEffect } from "react";
 import Loading from "../loading";
 import {
   Table,
@@ -16,6 +19,9 @@ import {
 import { IOrderItem } from "@/types/types";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import TableHeaderOptions from "@/components/TableHeaderOptions";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import toast from "react-hot-toast";
 
 const tableHeaders = [
   "Image",
@@ -27,10 +33,24 @@ const tableHeaders = [
   "Delivery Status",
 ];
 
-export default function MySellsPage() {
+export default function ManageOrdersPage() {
   //protect route
-  const { isLoading: authLoading } = useAuthCheck(USER_ROLE.SELLER);
+  const { isLoading: authLoading } = useAuthCheck(USER_ROLE.ADMIN);
   const { data: orders, isLoading, isError } = useGetAllOrdersQuery(undefined);
+  const [deliverOrder, deliverStatus] = useDeliverOrderMutation();
+
+  const handleDeliverOder = (orderId: string) => {
+    deliverOrder(orderId);
+  };
+
+  useEffect(() => {
+    if (deliverStatus.isSuccess) {
+      toast.success("Order delivered Successfully");
+    }
+    if (deliverStatus.isError) {
+      toast.error("Failed to deliver");
+    }
+  }, [deliverStatus]);
 
   //decide what to render
   let content;
@@ -56,7 +76,18 @@ export default function MySellsPage() {
             <TableCell>{order.cow.breed}</TableCell>
             <TableCell>{order.cow.location}</TableCell>
             <TableCell>{order.shippingAddress}</TableCell>
-            <TableCell>{order.isDelivered ? "Delivered" : "Pending"}</TableCell>
+            <TableCell>
+              {order.isDelivered ? (
+                <Badge>Delivered</Badge>
+              ) : (
+                <Button
+                  size={"sm"}
+                  onClick={() => handleDeliverOder(order._id)}
+                >
+                  Deliver
+                </Button>
+              )}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>

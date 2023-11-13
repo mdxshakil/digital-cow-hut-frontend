@@ -20,6 +20,14 @@ const orderApi = apiSlice.injectEndpoints({
         url: "/orders",
         method: "GET",
       }),
+      providesTags: ["orders"],
+    }),
+    deliverOrder: builder.mutation({
+      query: (orderId) => ({
+        url: `/orders/deliver/${orderId}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["orders"],
     }),
   }),
 });
@@ -28,4 +36,5 @@ export const {
   usePlaceOrderMutation,
   useGetOrderByTranIdQuery,
   useGetAllOrdersQuery,
+  useDeliverOrderMutation,
 } = orderApi;

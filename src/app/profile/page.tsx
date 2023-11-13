@@ -7,15 +7,9 @@ import { useGetMyProfileQuery } from "@/redux/features/profile/profileAPi";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
@@ -34,6 +28,7 @@ export default function ProfilePage() {
   if (isLoading || profileLoading) {
     return <Loading />;
   }
+console.log(profile);
 
   return (
     <Container>
@@ -57,7 +52,7 @@ export default function ProfilePage() {
                 {name?.firstName + " " + name?.lastName}
               </CardTitle>
               <p className="text-center text-primary tracking-wider my-2">
-                {role.toUpperCase()}
+                {role?.toUpperCase()}
               </p>
             </CardContent>
           </Card>
