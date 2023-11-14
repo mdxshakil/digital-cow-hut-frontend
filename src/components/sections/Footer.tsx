@@ -42,11 +42,11 @@ export default function Footer() {
     <Container>
       <footer className="border-t">
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-6 place-items-center">
-          <div className="text-xl md:text-2xl font-bold">
-            <Link href={"/"} passHref>
+          <div className="text-xl md:text-2xl">
+            <Link href={"/"} className="font-bold">
               CowHut
             </Link>
-            <p className="mt-2 text-xs text-justify text-gray-400">
+            <p className="mt-2 text-xs text-justify">
               Welcome to Digital Cow Hut, where the world of cattle commerce
               meets modern convenience. Explore a seamless platform for buying
               and selling cows with ease. Your trusted marketplace for all
