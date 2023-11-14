@@ -16,7 +16,7 @@ const AllCowsPage = () => {
   const [addToCart, addToCartStatus] = useAddToCartMutation();
   const router = useRouter();
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(2);
+  const [limit, setLimit] = useState(8);
   const {
     data: cows,
     isLoading,

@@ -5,7 +5,7 @@ import {
   useDeleteCowMutation,
   useGetAllCowsQuery,
 } from "@/redux/features/cow/cowApi";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -24,6 +24,8 @@ import toast from "react-hot-toast";
 import { Loader2 } from "lucide-react";
 import { useAuthCheck } from "@/hooks/useAuthCheck";
 import { USER_ROLE } from "@/types";
+import PaginationButton from "@/components/PaginationButton";
+import FilterButtons from "@/components/FilterButtons";
 
 const tableHeaders = [
   "Image",
@@ -37,7 +39,14 @@ const tableHeaders = [
 
 export default function MyCowsPage() {
   const { isLoading: authLoading } = useAuthCheck(USER_ROLE.ADMIN);
-  const { data: cows, isLoading, isError } = useGetAllCowsQuery(undefined);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(8);
+  const [filter, setFilter] = useState("all");
+  const {
+    data: cows,
+    isLoading,
+    isError,
+  } = useGetAllCowsQuery(`limit=${limit}&page=${page}&label=${filter}`);
   const [
     deleteCow,
     {
@@ -110,7 +119,8 @@ export default function MyCowsPage() {
 
   return (
     <Container>
-      <div className="mt-12">
+      <div className="my-12">
+        <FilterButtons filter={filter} setFilter={setFilter} />
         <div>
           <div>
             <Table>
@@ -123,6 +133,11 @@ export default function MyCowsPage() {
               {content}
             </Table>
           </div>
+          <PaginationButton
+            page={page}
+            setPage={setPage}
+            pageCount={cows?.meta?.pageCount}
+          />
         </div>
       </div>
     </Container>
