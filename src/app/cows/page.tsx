@@ -9,7 +9,8 @@ import toast from "react-hot-toast";
 import CowCard from "@/components/CowCard";
 import { useRouter } from "next/navigation";
 import PaginationButton from "@/components/PaginationButton";
-import { Button } from "@/components/ui/button";
+import FilterButtons from "@/components/FilterButtons";
+import Container from "@/components/Container";
 
 const AllCowsPage = () => {
   const { userId, role } = useAppSelector((state) => state.auth.user);
@@ -17,11 +18,12 @@ const AllCowsPage = () => {
   const router = useRouter();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(8);
+  const [filter, setFilter] = useState("all");
   const {
     data: cows,
     isLoading,
     isError,
-  } = useGetAllCowsQuery(`limit=${limit}&page=${page}`);
+  } = useGetAllCowsQuery(`limit=${limit}&page=${page}&label=${filter}`);
 
   const handleAddToCart = async (cowId: string) => {
     if (!userId) {
@@ -69,16 +71,19 @@ const AllCowsPage = () => {
   }
 
   return (
-    <div className="py-12 md:py-24">
-      <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
-        <div>{content}</div>
+    <Container>
+      <div className="py-12 md:py-24">
+        <FilterButtons filter={filter} setFilter={setFilter} />
+        <div className="flex flex-col gap-y-8 ">
+          <div>{content}</div>
+        </div>
+        <PaginationButton
+          page={page}
+          setPage={setPage}
+          pageCount={cows?.meta?.pageCount}
+        />
       </div>
-      <PaginationButton
-        page={page}
-        setPage={setPage}
-        pageCount={cows?.meta?.pageCount}
-      />
-    </div>
+    </Container>
   );
 };
 
