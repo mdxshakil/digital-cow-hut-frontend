@@ -4,21 +4,24 @@ import { ICow } from "@/types/types";
 import Loading from "../loading";
 import { useAppSelector } from "@/redux/hooks";
 import { useAddToCartMutation } from "@/redux/features/cart/cartApi";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import CowCard from "@/components/CowCard";
 import { useRouter } from "next/navigation";
+import PaginationButton from "@/components/PaginationButton";
+import { Button } from "@/components/ui/button";
 
 const AllCowsPage = () => {
   const { userId, role } = useAppSelector((state) => state.auth.user);
   const [addToCart, addToCartStatus] = useAddToCartMutation();
   const router = useRouter();
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(2);
   const {
     data: cows,
     isLoading,
     isError,
-    error,
-  } = useGetAllCowsQuery(undefined);
+  } = useGetAllCowsQuery(`limit=${limit}&page=${page}`);
 
   const handleAddToCart = async (cowId: string) => {
     if (!userId) {
@@ -70,6 +73,11 @@ const AllCowsPage = () => {
       <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
         <div>{content}</div>
       </div>
+      <PaginationButton
+        page={page}
+        setPage={setPage}
+        pageCount={cows?.meta?.pageCount}
+      />
     </div>
   );
 };

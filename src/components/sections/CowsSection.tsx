@@ -9,6 +9,8 @@ import Loading from "@/app/loading";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 const CowsSection = () => {
   const { role, userId } = useGetUserFromStore();
@@ -74,6 +76,11 @@ const CowsSection = () => {
       </h2>
       <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
         <div>{content}</div>
+      </div>
+      <div className="text-center">
+        <Button className="mt-6" size={"sm"}>
+          <Link href={"/cows"}>Browse all cows</Link>
+        </Button>
       </div>
     </div>
   );

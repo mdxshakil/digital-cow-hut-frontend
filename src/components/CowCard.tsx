@@ -49,14 +49,14 @@ export default function CowCard({
                 className="px-2 py-0 "
                 variant={cow.category === "Beef" ? "destructive" : "default"}
               >
-                {cow.category}
+                Category: {cow.category}
               </Badge>
-              <Badge
+              {/* <Badge
                 className="px-2 py-0 ml-2 "
                 variant={cow.label === "sold out" ? "outline" : "secondary"}
               >
                 {cow.label}
-              </Badge>
+              </Badge> */}
             </div>
           </div>
           <p className="text-sm flex gap-1 items-center my-1">
@@ -71,7 +71,11 @@ export default function CowCard({
         </CardContent>
         <CardFooter>
           <div className="flex justify-end gap-3 w-full">
-            {cow.label === "sold out" && <Badge>Sold out</Badge>}
+            {cow.label === "sold out" ? (
+              <Badge variant={"destructive"}>Sold out</Badge>
+            ) : (
+              <Badge>Available</Badge>
+            )}
             {userRole === "buyer" && cow.label === "for sale" && (
               <div className="flex gap-2">
                 <Button
