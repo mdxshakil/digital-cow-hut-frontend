@@ -4,12 +4,7 @@ import { useAuthCheck } from "@/hooks/useAuthCheck";
 import React from "react";
 import Loading from "../loading";
 import { useGetMyProfileQuery } from "@/redux/features/profile/profileAPi";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
@@ -28,7 +23,6 @@ export default function ProfilePage() {
   if (isLoading || profileLoading) {
     return <Loading />;
   }
-console.log(profile);
 
   return (
     <Container>
@@ -57,7 +51,7 @@ console.log(profile);
             </CardContent>
           </Card>
         </div>
-        <div className="md:col-span-2">
+        <div className="md:col-span-2 mb-6 md:mb-0">
           <Card>
             <CardHeader>
               <CardTitle>My Profile</CardTitle>
@@ -77,18 +71,24 @@ console.log(profile);
                     <TableCell>Phone</TableCell>
                     <TableCell>{phoneNumber}</TableCell>
                   </TableRow>
-                  <TableRow>
-                    <TableCell>Total Income</TableCell>
-                    <TableCell>{income}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Total Cow Sold</TableCell>
-                    <TableCell>0</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Total Cow Purchase</TableCell>
-                    <TableCell>0</TableCell>
-                  </TableRow>
+                  {role === "seller" && (
+                    <>
+                      <TableRow>
+                        <TableCell>Total Income</TableCell>
+                        <TableCell>{income}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Total Cow Sold</TableCell>
+                        <TableCell>0</TableCell>
+                      </TableRow>
+                    </>
+                  )}
+                  {role === "buyer" && (
+                    <TableRow>
+                      <TableCell>Total Cow Purchase</TableCell>
+                      <TableCell>0</TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </CardContent>

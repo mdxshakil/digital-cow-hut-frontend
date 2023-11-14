@@ -99,7 +99,7 @@ export default function ManageOrdersPage() {
       <div className="mt-12">
         <div>
           <Table>
-            <TableCaption>A list of your sells.</TableCaption>
+            <TableCaption>A list of all the orders</TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHeaderOptions headers={tableHeaders} />

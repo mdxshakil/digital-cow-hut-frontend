@@ -17,11 +17,6 @@ export const profileOptions = (userRole: string) => {
     },
     {
       id: 4,
-      path: "/manage-users",
-      label: "Manage Users",
-    },
-    {
-      id: 5,
       path: "/manage-cows",
       label: "Manage Cows",
     },
