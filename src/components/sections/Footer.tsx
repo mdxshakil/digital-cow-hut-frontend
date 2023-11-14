@@ -1,142 +1,102 @@
 import Link from "next/link";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Container from "../Container";
+
+const socialLinks = [
+  {
+    href: "https://www.facebook.com",
+    icon: <Facebook className="text-blue-500" />,
+  },
+  {
+    href: "https://www.twitter.com",
+    icon: <Twitter className="text-sky-300" />,
+  },
+  {
+    href: "https://www.instagram.com",
+    icon: <Instagram className="text-pink-500" />,
+  },
+  {
+    href: "https://www.linkedin.com",
+    icon: <Linkedin className="text-blue-400" />,
+  },
+];
+
+const quickLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About Us" },
+  { href: "/products", label: "Products" },
+  { href: "/contact", label: "Contact Us" },
+];
+
+const usefulLinks = [
+  { href: "/", label: "Terms and Conditions" },
+  { href: "/", label: "Privacy Policy" },
+  { href: "/", label: "FAQs" },
+  { href: "/", label: "Customer Support" },
+];
 
 export default function Footer() {
   return (
     <Container>
       <footer className="border-t">
-        <div
-          className="
-        container
-        flex flex-col flex-wrap
-        px-4
-        py-16
-        mx-auto
-        md:items-center
-        lg:items-start
-        md:flex-row md:flex-nowrap
-      "
-        >
-          <div className="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
-            <Link href={"/"} className="text-2xl text-white">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-6 place-items-center">
+          <div className="text-xl md:text-2xl font-bold">
+            <Link href={"/"} passHref>
               CowHut
             </Link>
             <p className="mt-2 text-xs text-justify text-gray-400">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima
-              nemo illo dicta et molestiae tempora autem odit vero commodi. Quia
-              voluptate ipsam amet officia sunt. Sint vitae magni quaerat
-              accusamus.
+              Welcome to Digital Cow Hut, where the world of cattle commerce
+              meets modern convenience. Explore a seamless platform for buying
+              and selling cows with ease. Your trusted marketplace for all
+              things bovine – bringing farmers and buyers together in the
+              digital age.
             </p>
             <div className="flex mt-4">
               <Input type="email" placeholder="Email" />
               <Button variant={"secondary"}>Subscribe</Button>
             </div>
             <div className="flex justify-center mt-4 space-x-4 lg:mt-2">
-              <Link href={""}>
-                <Facebook className="text-blue-500" />
-              </Link>
-              <Link href={""}>
-                <Twitter className="text-sky-300" />
-              </Link>
-              <Link href={""}>
-                <Instagram className="text-pink-500" />
-              </Link>
-              <Link href={""}>
-                <Linkedin className="text-blue-400" />
-              </Link>
+              {socialLinks.map(({ href, icon }, index) => (
+                <Link href={href} key={index} passHref>
+                  {icon}
+                </Link>
+              ))}
             </div>
           </div>
-          <div className="justify-between w-full mt-4 text-center lg:flex">
-            <div className="w-full px-4 lg:w-1/3 md:w-1/2">
-              <h2 className="mb-2 font-bold tracking-widest text-gray-100">
-                Quick Links
-              </h2>
-              <ul className="mb-8 space-y-2 text-sm list-none">
-                <li>
-                  <Link href={"/"} className="text-gray-300">
-                    Link 1
+          <div className="">
+            <h2 className="mb-2 font-bold tracking-widest text-gray-100">
+              Quick Links
+            </h2>
+            <ul className="mb-8 space-y-2 text-sm list-none">
+              {quickLinks.map(({ href, label }, index) => (
+                <li key={index}>
+                  <Link href={href} passHref>
+                    {label}
                   </Link>
                 </li>
-                <li>
-                  <Link href={"/"} className="text-gray-300">
-                    Link 2
+              ))}
+            </ul>
+          </div>
+          <div className="">
+            <h2 className="mb-2 font-bold tracking-widest text-gray-100">
+              Useful Links
+            </h2>
+            <ul className="mb-8 space-y-2 text-sm list-none">
+              {usefulLinks.map(({ href, label }, index) => (
+                <li key={index}>
+                  <Link href={href} passHref>
+                    {label}
                   </Link>
                 </li>
-                <li>
-                  <Link href={"/"} className="text-gray-300">
-                    Link 3
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/"} className="text-gray-300">
-                    Link 4
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="w-full px-4 lg:w-1/3 md:w-1/2">
-              <h2 className="mb-2 font-bold tracking-widest text-gray-100">
-                Quick Links
-              </h2>
-              <ul className="mb-8 space-y-2 text-sm list-none">
-                <li>
-                  <Link href={"/"} className="text-gray-300">
-                    Link 1
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/"} className="text-gray-300">
-                    Link 2
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/"} className="text-gray-300">
-                    Link 3
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/"} className="text-gray-300">
-                    Link 4
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="w-full px-4 lg:w-1/3 md:w-1/2">
-              <h2 className="mb-2 font-bold tracking-widest text-gray-100">
-                Quick Links
-              </h2>
-              <ul className="mb-8 space-y-2 text-sm list-none">
-                <li>
-                  <Link href={"/"} className="text-gray-300">
-                    Link 1
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/"} className="text-gray-300">
-                    Link 2
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/"} className="text-gray-300">
-                    Link 3
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/"} className="text-gray-300">
-                    Link 4
-                  </Link>
-                </li>
-              </ul>
-            </div>
+              ))}
+            </ul>
           </div>
         </div>
-        <div className="flex justify-center -mt-12">
-          <p className="text-center text-white pb-2">
-            @2024 All rights reserved by your website.
+        <div className="flex justify-center mt-8">
+          <p className="text-center pb-2">
+            @2024 All rights reserved by Digital Cow Hut.
           </p>
         </div>
       </footer>
