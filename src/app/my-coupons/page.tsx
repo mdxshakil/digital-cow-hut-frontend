@@ -16,7 +16,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Copy } from "lucide-react";
-import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function MyCouponsPage() {
