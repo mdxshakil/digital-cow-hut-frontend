@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import useGetUserFromStore from "@/hooks/useGetUserFromStore";
 import { usePlaceOrderMutation } from "@/redux/features/order/orderApi";
 import { ICoupon, ICow } from "@/types/types";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Input } from "./input";
 import { Label } from "./label";
@@ -35,6 +35,16 @@ const OrderPlaceModal = ({ cow, btnSize, btnChild }: IProps) => {
   const [selectedCoupon, setSelectedCoupon] = useState<any>();
   const [finalPrice, setFinalPrice] = useState<number>();
   const { data: coupons } = useGetMyCouponsQuery(userId);
+  const [openModal, setOpenModal] = useState(false);
+  const router = useRouter();
+
+  const handleOpenModal = () => {
+    if (!userId) {
+      router.push("/login");
+      return
+    }
+    setOpenModal(true);
+  };
 
   const handlePlaceOrder = async () => {
     placeOrder({
@@ -70,9 +80,9 @@ const OrderPlaceModal = ({ cow, btnSize, btnChild }: IProps) => {
   }, [data?.data?.redirectURL]);
 
   return (
-    <AlertDialog>
+    <AlertDialog open={openModal}>
       <AlertDialogTrigger asChild>
-        <Button size={btnSize} variant={"default"}>
+        <Button size={btnSize} variant={"default"} onClick={handleOpenModal}>
           {btnChild}
         </Button>
       </AlertDialogTrigger>
@@ -136,7 +146,9 @@ const OrderPlaceModal = ({ cow, btnSize, btnChild }: IProps) => {
           </div>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel onClick={() => setOpenModal(false)}>
+            Cancel
+          </AlertDialogCancel>
           <AlertDialogAction onClick={handlePlaceOrder}>
             Confirm
           </AlertDialogAction>

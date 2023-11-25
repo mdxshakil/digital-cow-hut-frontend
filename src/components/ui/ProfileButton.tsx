@@ -12,6 +12,7 @@ import { apiSlice } from "@/redux/api/apiSlice";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type IProps = {
   role: string;
@@ -29,10 +30,11 @@ export default function ProfileButton({
 }: IProps) {
   const dispatch = useAppDispatch();
   const options = profileOptions(role);
-
+  const router = useRouter();
   const handleLogOut = () => {
     dispatch(userLoggedOut());
-    dispatch(apiSlice.util.resetApiState());
+    // router.push("/");
+    // dispatch(apiSlice.util.resetApiState());
   };
 
   return (
@@ -63,7 +65,9 @@ export default function ProfileButton({
             <Link href={option.path}>{option.label}</Link>
           </DropdownMenuItem>
         ))}
-        <DropdownMenuItem onClick={handleLogOut}>Logout</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleLogOut} className="cursor-pointer">
+          Logout
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

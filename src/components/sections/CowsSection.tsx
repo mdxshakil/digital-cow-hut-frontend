@@ -39,7 +39,7 @@ const CowsSection = () => {
     }
     if (addToCartStatus.isError) {
       toast.error(
-        (addToCartStatus.error as any)?.data?.message || "An error occured"
+        (addToCartStatus.error as any)?.data?.message || "Failed to add to cart"
       );
     }
   }, [addToCartStatus]);

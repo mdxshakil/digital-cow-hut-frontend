@@ -21,7 +21,7 @@ const tableHeaders = [
   "TransactionID",
   "Cow Location",
   "Weight(KG)",
-  "Amount",
+  "Original Price",
   "Delivery",
 ];
 

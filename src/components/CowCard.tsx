@@ -51,12 +51,12 @@ export default function CowCard({
               >
                 Category: {cow.category}
               </Badge>
-              {/* <Badge
+              <Badge
                 className="px-2 py-0 ml-2 "
                 variant={cow.label === "sold out" ? "outline" : "secondary"}
               >
                 {cow.label}
-              </Badge> */}
+              </Badge>
             </div>
           </div>
           <p className="text-sm flex gap-1 items-center my-1">
@@ -71,22 +71,36 @@ export default function CowCard({
         </CardContent>
         <CardFooter>
           <div className="flex justify-end gap-3 w-full">
-            {cow.label === "sold out" ? (
-              <Badge variant={"destructive"}>Sold out</Badge>
-            ) : (
-              <Badge>Available</Badge>
-            )}
-            {userRole === "buyer" && cow.label === "for sale" && (
-              <div className="flex gap-2">
-                <Button
-                  size={"sm"}
-                  variant={"outline"}
-                  onClick={() => handleAddToCart(cow._id)}
-                  disabled={isLoading}
-                >
-                  Add to cart
-                </Button>
-                <OrderPlaceModal cow={cow} btnSize="sm" btnChild="Buy Now" />
+            {userRole === "admin" || userRole === "seller" ? null : (
+              <div>
+                {cow.label === "for sale" ? (
+                  <div className="flex gap-2">
+                    <Button
+                      size={"sm"}
+                      variant={"outline"}
+                      onClick={() => handleAddToCart(cow._id)}
+                      disabled={isLoading}
+                    >
+                      Add to cart
+                    </Button>
+                    <OrderPlaceModal
+                      cow={cow}
+                      btnSize="sm"
+                      btnChild="Buy Now"
+                    />
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <Button
+                      size={"sm"}
+                      variant={"destructive"}
+                      disabled
+                      className="cursor-not-allowed"
+                    >
+                      Sold Out
+                    </Button>
+                  </div>
+                )}
               </div>
             )}
           </div>

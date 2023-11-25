@@ -16,6 +16,7 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const { userId, profilePicture, name, role } = useGetUserFromStore();
 
+  
   const routes = [
     {
       href: "/",

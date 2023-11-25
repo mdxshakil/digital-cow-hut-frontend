@@ -12,13 +12,11 @@ export default function ProfilePage() {
   //protect route
   const { isLoading } = useAuthCheck();
   const {
-    data: profile,
+    data,
     isLoading: profileLoading,
-    isError,
-    error,
   } = useGetMyProfileQuery(undefined);
   const { phoneNumber, profilePicture, role, name, income } =
-    profile?.data || {};
+    data?.data?.profile || {};
 
   if (isLoading || profileLoading) {
     return <Loading />;
@@ -32,13 +30,13 @@ export default function ProfilePage() {
             <CardHeader className="flex items-center">
               <Image
                 src={profilePicture}
-                alt={name?.firstName}
+                alt={name?.firstName || "Profile picture"}
                 width={0}
                 height={0}
                 sizes="100vw"
                 style={{ width: "60%", height: "auto" }} //
                 loading="lazy"
-                className="aspect-square object-cover rounded-full border-primary transition-all duration-300 hover:scale-105"
+                className="aspect-square object-cover rounded-full border-primary transition-all duration-300 hover:scale-105 text-center italic"
               />
             </CardHeader>
             <CardContent>
@@ -79,14 +77,14 @@ export default function ProfilePage() {
                       </TableRow>
                       <TableRow>
                         <TableCell>Total Cow Sold</TableCell>
-                        <TableCell>0</TableCell>
+                        <TableCell>{data?.data?.totalCowSold}</TableCell>
                       </TableRow>
                     </>
                   )}
                   {role === "buyer" && (
                     <TableRow>
                       <TableCell>Total Cow Purchase</TableCell>
-                      <TableCell>0</TableCell>
+                      <TableCell>{data?.data?.totalCowPurchased}</TableCell>
                     </TableRow>
                   )}
                 </TableBody>
