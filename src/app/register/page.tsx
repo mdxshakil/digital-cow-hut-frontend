@@ -113,7 +113,7 @@ export default function RegisterPage() {
               {isLoading || loading ? "Loading..." : "Register"}
             </Button>
           </Form>
-          <Link href={"/register"}>
+          <Link href={"/login"}>
             <p className="mt-2 text-primary text-sm">
               Already have an account?
             </p>

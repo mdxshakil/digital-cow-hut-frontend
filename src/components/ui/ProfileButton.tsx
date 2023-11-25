@@ -8,6 +8,7 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { profileOptions } from "@/constants/navbar";
+import { apiSlice } from "@/redux/api/apiSlice";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import Link from "next/link";
@@ -28,6 +29,12 @@ export default function ProfileButton({
 }: IProps) {
   const dispatch = useAppDispatch();
   const options = profileOptions(role);
+
+  const handleLogOut = () => {
+    dispatch(userLoggedOut());
+    dispatch(apiSlice.util.resetApiState());
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -56,9 +63,7 @@ export default function ProfileButton({
             <Link href={option.path}>{option.label}</Link>
           </DropdownMenuItem>
         ))}
-        <DropdownMenuItem onClick={() => dispatch(userLoggedOut())}>
-          Logout
-        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handleLogOut}>Logout</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

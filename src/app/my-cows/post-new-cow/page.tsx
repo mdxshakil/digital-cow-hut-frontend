@@ -125,9 +125,7 @@ export default function PostNewCowPage() {
                   type="file"
                   className="file:text-primary file:font-bold file:cursor-pointer"
                   accept="image/jpg, image/jpeg"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setImage(e?.target?.files?.[0])
-                  }
+                   
                 />
               </FormControl>
             </FormItem>

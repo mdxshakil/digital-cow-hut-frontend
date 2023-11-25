@@ -25,10 +25,6 @@ export default function Navbar() {
       href: "/cows",
       label: "Cows",
     },
-    {
-      href: "/",
-      label: "Other",
-    },
   ];
   return (
     <header className="sm:flex sm:justify-between  border-b">
